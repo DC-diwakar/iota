@@ -1,7 +1,7 @@
 package com.iota;
 import java.io.IOException;
 import java.io.PrintWriter;
-
+import org.json.simple.JSONObject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +19,7 @@ public class StudentServlet extends HttpServlet {
         String address = req.getParameter("address");
 	String pincode= req.getParameter("pincode");
 	int quantity=Integer.parseInt(req.getParameter("quantity"));
-        resp.setContentType("text/html");
+        resp.setContentType("application/json");
         PrintWriter printWriter = resp.getWriter();
         CustomerDAO customerDAO=new CustomerDAO();
 	Customer customer=new Customer();
@@ -30,7 +30,19 @@ public class StudentServlet extends HttpServlet {
 	customer.setPincode(pincode);
 	customer.setQuantity(quantity);
 	boolean status=customerDAO.addCustomer(customer);
-	if(status) printWriter.println("SUCCESSFULL");
+	if(status)
+	{
+	GeneratePaymentLink gpl=new GeneratePaymentLink();
+	JSONObject response=gpl.generateLink(customer);	
+	if(response!=null)
+	{
+	response.put("customerId",customer.getId());
+	printWriter.println(response.toString());	
+	}else
+	{
+	printWriter.println("FAILED");
+	}
+	}
 	else printWriter.println("FAILED");
 	printWriter.close();
     }

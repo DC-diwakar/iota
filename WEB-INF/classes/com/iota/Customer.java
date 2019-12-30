@@ -1,6 +1,7 @@
 package com.iota;
 public class Customer
 {
+private int id;
 private String name;
 private String email;
 private String contact;
@@ -8,6 +9,14 @@ private String address;
 private String pincode;
 private int quantity;
 
+public void setId(int id)
+{
+this.id=id;
+}
+public int getId()
+{
+return this.id;
+}
 public void setName(String name)
 {
 this.name=name;

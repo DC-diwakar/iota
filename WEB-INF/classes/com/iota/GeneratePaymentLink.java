@@ -6,7 +6,7 @@ import org.json.simple.parser.*;
 import com.paytm.pg.merchant.*;
 public class GeneratePaymentLink
 {
-public void generateLink()
+public JSONObject generateLink(Customer customer)
 {
 /* initialize an object */
 JSONObject paytmParams = new JSONObject();
@@ -16,8 +16,8 @@ JSONObject body = new JSONObject();
 JSONObject customerContact=new JSONObject();
 
 /* Find your MID in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys */
-body.put("mid", "RugdjG44197832525788");
-
+//body.put("mid", "RugdjG44197832525788");
+body.put("mid","edtYcP19717760789682"); // prod
 /* Possible value are "GENERIC", "FIXED", "INVOICE" */
 body.put("linkType", "FIXED");
 
@@ -27,10 +27,10 @@ body.put("linkDescription", "iotahub payment");
 /* Enter your choice of payment link name here, special characters and spaces are not allowed */
 body.put("linkName", "iotahubcalendarpaymentlink");
 body.put("sendSMS","true");
-body.put("amount","149");
+body.put("amount",customer.getQuantity()*155);
 body.put("statusCallbackUrl","iotahub.in/StudentServlet");
-customerContact.put("customerName","DC");
-customerContact.put("customerMobile","9174954181");
+customerContact.put("customerName",customer.getName());
+customerContact.put("customerMobile",customer.getContact());
 body.put("customerContact",customerContact);
 /**
  * Generate checksum by parameters we have in body
@@ -39,7 +39,7 @@ body.put("customerContact",customerContact);
  */
 try {
 
-String checksum = CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckSum("BTr0sZJ!kR7tXtjv", body.toString());
+String checksum = CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckSum("8kxUggPM3SZMQ!@j", body.toString());
 
 /* head parameters */
 JSONObject head = new JSONObject();
@@ -56,11 +56,12 @@ paytmParams.put("head", head);
 String post_data = paytmParams.toString();
 
 /* for Staging */
-URL url = new URL("https://securegw-stage.paytm.in/link/create");
+//URL url = new URL("https://securegw-stage.paytm.in/link/create");
 JSONObject rspp=null;
+JSONObject linkObject=null;
 JSONParser parser = new JSONParser();
 /* for Production */
-// URL url = new URL("https://securegw.paytm.in/link/create);
+URL url = new URL("https://securegw.paytm.in/link/create");
 
 	HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 	connection.setRequestMethod("POST");
@@ -79,8 +80,8 @@ JSONParser parser = new JSONParser();
 		System.out.println("Response: " + responseData+"\n");
 	}
 	if(rspp!=null){
-	JSONObject objj=(JSONObject)rspp.get("body");
-	System.out.println(objj.get("linkId"));
+	linkObject=(JSONObject)rspp.get("body");
+	System.out.println(linkObject.get("linkId"));
 
 
 	//System.out.println((JSONObject)rspp.get("body").get("linkId"));
@@ -90,15 +91,22 @@ JSONParser parser = new JSONParser();
 	}
 	// System.out.append("Request: " + post_data);
 	responseReader.close();
+	return linkObject;
 } catch (Exception exception) {
 	exception.printStackTrace();
 }
-
+finally{
+return null; 
+}
 }
 
 public static void main(String gg[])
 {
+Customer cst=new Customer();
+cst.setName("DC");
+cst.setContact("9174954181");
+cst.setQuantity(1);
 GeneratePaymentLink gpl=new GeneratePaymentLink();
-gpl.generateLink();
+gpl.generateLink(cst);
 }
 }
