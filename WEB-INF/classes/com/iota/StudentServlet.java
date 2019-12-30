@@ -26,6 +26,7 @@ public class StudentServlet extends HttpServlet {
 	customer.setName(name);
 	customer.setEmail(email);
 	customer.setContact(mobileNumber);
+	customer.setAddress(address);
 	customer.setPincode(pincode);
 	customer.setQuantity(quantity);
 	boolean status=customerDAO.addCustomer(customer);
