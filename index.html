@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Iota.hub</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="accept_order.js"></script>
+</head>
+<body class="bg-dark">
+
+<div class="container text-white">
+  <h1>iota.<b>Hub</b></h1>
+<form id="customer_cart">
+<div class="form-group">
+  <label for="customer_name">Full Name</label>
+  <input type="text" class="form-control" id="customer_name">
+   <label for="contact_number">Mobile Number</label>
+  <input type="number" class="form-control" id="contact_number">
+ <label for="customer_email">Email address</label>
+  <input type="email" class="form-control" id="customer_email">
+
+ <label for="product_quantity">Select Quantity</label>
+  <select class="form-control" id="product_quantity">
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+  </select>
+
+
+ <label for="customer_address">Address for delivery</label>
+  <input type="text" class="form-control" id="customer_address">
+  <label for="address_pincode">Pincode</label>
+  <input type="number" class="form-control" id="address_pincode">
+
+
+<div class="form-check-inline">
+  <label class="form-check-label">
+    <input type="radio" class="form-check-input" name="optradio">Cash On Delivery
+  </label>
+</div>
+<div class="form-check-inline disabled">
+  <label class="form-check-label">
+    <input type="radio" class="form-check-input" name="optradio">UPI Payment!
+</label>
+</div>&nbsp;&nbsp;
+</div>
+<button class="btn btn-secondary btn-outline-success text-white" onclick="validateCustomer()">Submit</button>
+</form>
+</div>
+</body>
+</html>
