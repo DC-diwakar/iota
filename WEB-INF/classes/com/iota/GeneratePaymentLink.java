@@ -10,7 +10,7 @@ public JSONObject generateLink(Customer customer)
 {
 /* initialize an object */
 JSONObject paytmParams = new JSONObject();
-
+JSONObject linkObject=null;
 /* body parameters */
 JSONObject body = new JSONObject();
 JSONObject customerContact=new JSONObject();
@@ -58,7 +58,6 @@ String post_data = paytmParams.toString();
 /* for Staging */
 //URL url = new URL("https://securegw-stage.paytm.in/link/create");
 JSONObject rspp=null;
-JSONObject linkObject=null;
 JSONParser parser = new JSONParser();
 /* for Production */
 URL url = new URL("https://securegw.paytm.in/link/create");
@@ -95,9 +94,7 @@ URL url = new URL("https://securegw.paytm.in/link/create");
 } catch (Exception exception) {
 	exception.printStackTrace();
 }
-finally{
-return null; 
-}
+return linkObject;
 }
 
 public static void main(String gg[])
