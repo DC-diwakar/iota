@@ -9,12 +9,13 @@ try
 Connection c;
 Class.forName("com.mysql.jdbc.Driver");
 c=DriverManager.getConnection("jdbc:mysql://localhost:3306/iota_ny_sale","iota","iota@3210");
-PreparedStatement ps=c.prepareStatement("insert into customer values(?,?,?,?,?)");  
+PreparedStatement ps=c.prepareStatement("insert into customer(name,mobile_number,email,address,pincode,quantity) values(?,?,?,?,?,?)");  
 ps.setString(1,customer.getName());
-ps.setString(2,customer.getContact());  
-ps.setString(3,customer.getAddress());
-ps.setString(4,customer.getPincode()); 
-ps.setInt(5,customer.getQuantity());
+ps.setString(2,customer.getContact());
+ps.setString(3,customer.getEmail());  
+ps.setString(4,customer.getAddress());
+ps.setString(5,customer.getPincode()); 
+ps.setInt(6,customer.getQuantity());
 int i=ps.executeUpdate();  
 ps.close();
 c.close();
