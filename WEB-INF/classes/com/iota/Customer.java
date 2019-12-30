@@ -5,8 +5,8 @@ private String name;
 private String email;
 private String contact;
 private String address;
-private int pincode;
-private boolean modeOfPayment;
+private String pincode;
+private int quantity;
 
 public void setName(String name)
 {
@@ -40,12 +40,20 @@ public String getAddress()
 {
 return this.address;
 }
-public void setPinCode(int pincode)
+public void setPincode(String pincode)
 {
 this.pincode=pincode;
 }
-public int getPincode()
+public String getPincode()
 {
 return this.pincode;
+}
+public void setQuantity(int quantity)
+{
+this.quantity=quantity;
+}
+public int getQuantity()
+{
+return this.quantity;
 }
 }

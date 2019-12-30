@@ -21,14 +21,15 @@ public class StudentServlet extends HttpServlet {
 	int quantity=Integer.parseInt(req.getParameter("quantity"));
         resp.setContentType("text/html");
         PrintWriter printWriter = resp.getWriter();
-        printWriter.print("<html>");
-        printWriter.print("<body>");
-        printWriter.print("<h1>Student Resistration Form Data</h1>");
-        printWriter.print("<p> firstName :: " + name + "</p>");
-        printWriter.print("<p> mobileNumber :: " + mobileNumber + "</p>");
-        printWriter.print("<p> quantity :: " + quantity + "</p>");
-        printWriter.print("</body>");
-        printWriter.print("</html>");
-        printWriter.close();
+        CustomerDAO customerDAO=new CustomerDAO();
+	Customer customer=new Customer();
+	customer.setName(name);
+	customer.setContact(mobileNumber);
+	customer.setPincode(pincode);
+	customer.setQuantity(quantity);
+	boolean status=customerDAO.addCustomer(customer);
+	if(status) printWriter.println("SUCCESSFULL");
+	else printWriter.println("FAILED");
+	printWriter.close();
     }
 }
