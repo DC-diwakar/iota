@@ -40,10 +40,14 @@ public class StudentServlet extends HttpServlet {
 	printWriter.println(response.toString());	
 	}else
 	{
+	resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,"Error message");
 	printWriter.println("FAILED");
 	}
 	}
-	else printWriter.println("FAILED");
+	else {
+	resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,"Error message");
+	printWriter.println("FAILED");
+	}
 	printWriter.close();
     }
 }

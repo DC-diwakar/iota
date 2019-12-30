@@ -1,5 +1,33 @@
+var customerId='';
+function addOrderId()
+{
+var orderId=$("#order_id").val();
+if(orderId=='')
+{
+alert("Invalid order Id");
+return;
+}
+ $.ajax({
+  type: "POST",
+  url: "mapOrderId",
+  data: {customerId:customerId,orderId:orderId},
+  success: function(data,status){
+     alert("successful");
+     $("#orderIdDiv").hide();
+     window.location.href='http://iotahub.in';
+  },
+  error: function(){
+                $('#orderIdDiv').hide();
+                alert("error");
+        }
+});
+
+
+}
+
 function validateCustomer()
 {
+customerId='';
 var customerName=$("#customer_name").val();
 var mobileNumber=$("#contact_number").val();
 var pincode=$("#address_pincode").val();
@@ -16,10 +44,14 @@ if($('#customerCart').valid()) {
   data: {customerName:customerName,mobileNumber:mobileNumber,pincode:pincode,address:address,email:email,quantity:quantity  },
   success: function(data,status){
      $("#orderIdDiv").show();
-     $("#orderIdDiv").append(data.merchantHtml);
-  },
+     $("#paytmDiv").show();
+     $("paytmDiv").html("");
+     $("#paytmDiv").append(data.merchantHtml);
+     customerId=data.customerId;	 
+ },
   error: function(){
-		$('#id').hide();
+		$('#paytmDiv').hide();
+		$('#orderIdDiv').hide();
 		alert("error");
 	}
 }); 
