@@ -10,6 +10,11 @@ img {vertical-align: middle;}
   margin: auto;
 }
 
+.error {
+  color: #F00;
+  background-color: #FFF;
+}
+
 /* Next & previous buttons */
 .prev, .next {
   cursor: pointer;
