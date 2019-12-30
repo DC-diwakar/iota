@@ -15,9 +15,11 @@ if($('#customerCart').valid()) {
   url: "StudentServlet",
   data: {customerName:customerName,mobileNumber:mobileNumber,pincode:pincode,address:address,email:email,quantity:quantity  },
   success: function(data,status){
-     alert("successful");
+     $("#orderIdDiv").show();
+     $("#orderIdDiv").append(data.merchantHtml);
   },
   error: function(){
+		$('#id').hide();
 		alert("error");
 	}
 }); 
