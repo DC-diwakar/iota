@@ -13,7 +13,7 @@ return;
   data: {customerId:customerId,orderId:orderId},
   success: function(data,status){
      alert("successful");
-     $("#orderIdDiv").hide();
+//   $("#orderIdDiv").hide();
      window.location.href='http://iotahub.in';
   },
   error: function(){
@@ -43,7 +43,7 @@ if($('#customerCart').valid()) {
   url: "StudentServlet",
   data: {customerName:customerName,mobileNumber:mobileNumber,pincode:pincode,address:address,email:email,quantity:quantity  },
   success: function(data,status){
-     $("#orderIdDiv").show();
+//     $("#orderIdDiv").show();
      $("#paytmDiv").show();
      $("paytmDiv").html("");
      $("#paytmDiv").append(data.merchantHtml);
@@ -51,7 +51,7 @@ if($('#customerCart').valid()) {
  },
   error: function(){
 		$('#paytmDiv').hide();
-		$('#orderIdDiv').hide();
+//		$('#orderIdDiv').hide();
 		alert("error");
 	}
 }); 
