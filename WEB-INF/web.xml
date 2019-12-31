@@ -32,4 +32,14 @@
 <servlet-name>StudentServlet</servlet-name>
 <url-pattern>/StudentServlet</url-pattern>
 </servlet-mapping>
+<servlet>
+<servlet-name>GetAllCustomer</servlet-name>
+<servlet-class>com.iota.GetAllCustomer</servlet-class>
+</servlet>
+<servlet-mapping>
+<servlet-name>GetAllCustomer</servlet-name>
+<url-pattern>/getAllCustomer</url-pattern>
+</servlet-mapping>
+
+
 </web-app>
